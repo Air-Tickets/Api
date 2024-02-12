@@ -20,7 +20,7 @@ public class AccountController {
         return accountRepository.getAllAccounts();
     }
 
-    @PostMapping("/login/{login}")
+    @GetMapping("/login/{login}")
     public boolean logIn(@PathVariable("login")String login, @RequestBody String password) {
         return accountRepository.login(login, password);
     }

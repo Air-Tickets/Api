@@ -9,7 +9,7 @@ public class AccountDTO {
     String Nazwisko;
     String Pesel;
     String Login;
-    String Password;
+    String Haslo;
 
     public Integer getId() {
         return id;
@@ -51,11 +51,11 @@ public class AccountDTO {
         Login = login;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getHaslo() {
+        return Haslo;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setHaslo(String haslo) {
+        Haslo = haslo;
     }
 }

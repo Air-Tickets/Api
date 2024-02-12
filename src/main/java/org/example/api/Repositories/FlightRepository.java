@@ -1,18 +1,20 @@
 package org.example.api.Repositories;
 
+import org.example.api.Models.FlightDTO;
 import org.example.api.Models.TicketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
-public class TicketRepository {
+public class FlightRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public List<TicketDTO> getAllTickets(){
-        return jdbcTemplate.query("SELECT * FROM bilety", BeanPropertyRowMapper.newInstance(TicketDTO.class));
+    public List<FlightDTO> getAllFlights(){
+        return jdbcTemplate.query("SELECT * FROM lot", BeanPropertyRowMapper.newInstance(FlightDTO.class));
     }
 }

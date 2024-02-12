@@ -22,6 +22,6 @@ public class AccountRepository {
     public boolean login(String login, String password){
         AccountDTO account = jdbcTemplate.queryForObject("SELECT * FROM uzytkownicy WHERE login = ?",  BeanPropertyRowMapper.newInstance(AccountDTO.class), login);
         assert account != null;
-        return (Objects.equals(account.getPassword(), password));
+        return (Objects.equals(account.getHaslo(), password));
     }
 }
