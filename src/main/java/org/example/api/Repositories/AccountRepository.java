@@ -19,9 +19,11 @@ public class AccountRepository {
         return jdbcTemplate.query("SELECT * FROM uzytkownicy", BeanPropertyRowMapper.newInstance(AccountDTO.class));
     }
 
-    public boolean login(String login, String password){
-        AccountDTO account = jdbcTemplate.queryForObject("SELECT * FROM uzytkownicy WHERE login = ?",  BeanPropertyRowMapper.newInstance(AccountDTO.class), login);
-        assert account != null;
-        return (Objects.equals(account.getHaslo(), password));
+    public AccountDTO login(String login, String password){
+        List<AccountDTO> account = jdbcTemplate.query("SELECT * FROM uzytkownicy WHERE login = ?",  BeanPropertyRowMapper.newInstance(AccountDTO.class), login);
+        if(!account.isEmpty() && Objects.equals(account.get(0).getHaslo(), password)){
+            return account.get(0);
+        }
+        return null;
     }
 }
