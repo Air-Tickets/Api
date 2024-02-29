@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 public class TicketDTO {
     @Id
-    Integer id;
+    String id;
     Integer id_uzytkownika;
     String Imie_na_bilecie;
     String Nazwisko_na_bilecie;
