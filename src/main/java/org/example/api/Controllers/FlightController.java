@@ -15,6 +15,7 @@ public class FlightController {
     @Autowired
     FlightRepository flightRepository;
 
+    //lista wszystkich lotów
     @CrossOrigin
     @GetMapping("")
     public List<FlightDTO> getFlights(){

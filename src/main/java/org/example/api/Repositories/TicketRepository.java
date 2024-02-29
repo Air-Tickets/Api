@@ -2,7 +2,11 @@ package org.example.api.Repositories;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.example.api.Models.TicketDTO;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,20 +35,20 @@ public class TicketRepository {
         return takenSeats;
     }
 
-    public boolean addTicket(String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        TicketDTO ticket = objectMapper.readValue(json, TicketDTO.class);
-        TicketDTO maxId = jdbcTemplate.queryForObject("SELECT Id FROM bilety SORT BY Id DESC LIMIT 1", BeanPropertyRowMapper.newInstance(TicketDTO.class));
+    public boolean addTicket(String json) throws ParseException {
+        JSONParser parser = new JSONParser();
+        JSONObject ticket = (JSONObject) parser.parse(json);
+        TicketDTO maxId = jdbcTemplate.queryForObject("SELECT Id FROM bilety ORDER BY Id DESC LIMIT 1", BeanPropertyRowMapper.newInstance(TicketDTO.class));
         assert maxId != null;
-        jdbcTemplate.update("INSERT INTO bilety VALUES ?, ?, ?, ?, ?, ?, ?, ?",
+        jdbcTemplate.update("INSERT INTO bilety VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 maxId.getId()+1,
-                ticket.getId_uzytkownika(),
-                ticket.getImie_na_bilecie(),
-                ticket.getNazwisko_na_bilecie(),
-                ticket.getPesel_na_bilecie(),
-                ticket.getId_lotu(),
-                ticket.getMiejsce_w_samolocie(),
-                ticket.getMaksymalna_waga_bagazu());
+                ticket.get("id_uzytkownika"),
+                ticket.get("Imie_na_bilecie").toString(),
+                ticket.get("Nazwisko_na_bilecie").toString(),
+                ticket.get("Pesel_na_bilecie"),
+                ticket.get("id_lotu"),
+                ticket.get("Miejsce_w_samolocie").toString(),
+                ticket.get("Maksymalna_waga_bagazu"));
         return true;
     }
 }
