@@ -33,5 +33,10 @@ public class TicketController {
     //ZASTOSOWANIE: DesktopApp - kupowanie biletów
     @PutMapping("buyTicket")
     public boolean buyTicket(@RequestBody String json) throws ParseException {return ticketRepository.addTicket(json);}
+
+    //URL: przekazuje kod kreskowy biletu
+    //ZWRACA: bilet
+    @GetMapping("scan/{code}")
+    public TicketDTO getTicketByCode(@PathVariable("code") String code) {return ticketRepository.getTicketById(code);}
 }
 

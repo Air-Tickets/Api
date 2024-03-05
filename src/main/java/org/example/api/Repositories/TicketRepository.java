@@ -56,4 +56,10 @@ public class TicketRepository {
                 ticket.get("Maksymalna_waga_bagazu"));
         return true;
     }
+
+    //PRZYJMUJE: id biletu
+    //ZWRACA: bilet
+    public TicketDTO getTicketById(String id){
+        return jdbcTemplate.queryForObject("SELECT * FROM bilety WHERE id = ?", BeanPropertyRowMapper.newInstance(TicketDTO.class), id);
+    }
 }
