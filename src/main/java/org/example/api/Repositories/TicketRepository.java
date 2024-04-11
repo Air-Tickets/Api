@@ -1,7 +1,6 @@
 package org.example.api.Repositories;
 
 import org.example.api.BarCodeGenerator;
-import org.example.api.Models.AccountDTO;
 import org.example.api.Models.TicketDTO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,11 +12,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class TicketRepository {
@@ -87,7 +83,7 @@ public class TicketRepository {
                 +"\n"
                 +"\nHave a nice flight " + ticket.get("Imie_na_bilecie").toString() + " " + ticket.get("Nazwisko_na_bilecie").toString()
                 +"\n"
-                +"\nBest regards, Amelka team";
+                +"\nBest regards, A.M.E.L.K.A. team";
         mailSend(usersEmail, text, subject);
         return true;
     }
